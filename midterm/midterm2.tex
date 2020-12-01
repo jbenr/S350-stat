@@ -1,0 +1,461 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={midterm2.R},
+            pdfauthor={benjamin},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{midterm2.R}
+\author{benjamin}
+\date{2020-12-01}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Midterm 2}
+\CommentTok{# Ben Reichert}
+
+\CommentTok{### 1}
+
+\CommentTok{#a}
+\NormalTok{pin <-}\StringTok{ }\FloatTok{0.894}
+\NormalTok{q <-}\StringTok{ }\KeywordTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}
+\NormalTok{nin <-}\StringTok{ }\DecValTok{110}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Mouthgaurd in: ("}\NormalTok{,pin }\OperatorTok{-}\StringTok{ }\NormalTok{q }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(pin}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pin)}\OperatorTok{/}\NormalTok{nin),}\StringTok{","}\NormalTok{,pin }\OperatorTok{+}\StringTok{ }\NormalTok{q }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(pin}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pin)}\OperatorTok{/}\NormalTok{nin),}\StringTok{")}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Mouthgaurd in: ( 0.8364728 , 0.9515272 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#b}
+\NormalTok{pout <-}\StringTok{ }\FloatTok{0.925}
+\NormalTok{q <-}\StringTok{ }\KeywordTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}
+\NormalTok{nout <-}\StringTok{ }\DecValTok{198}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Mouthguard out: ("}\NormalTok{,pout }\OperatorTok{-}\StringTok{ }\NormalTok{q }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(pout}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pout)}\OperatorTok{/}\NormalTok{nout),}\StringTok{","}\NormalTok{,pout }\OperatorTok{+}\StringTok{ }\NormalTok{q }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(pout}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pout)}\OperatorTok{/}\NormalTok{nout),}\StringTok{")"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Mouthguard out: ( 0.8883126 , 0.9616874 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#c}
+\CommentTok{# A p-value of 0.33 tells me that we fail to reject the null hypothesis that Curry's free throw ability}
+\CommentTok{# is the same mouthguard in as it is mouthguard out.}
+
+
+\CommentTok{### 2}
+\NormalTok{ren <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{2.2}\NormalTok{,}\FloatTok{1.52}\NormalTok{,}\FloatTok{1.54}\NormalTok{,.}\DecValTok{77}\NormalTok{,.}\DecValTok{34}\NormalTok{,.}\DecValTok{45}\NormalTok{,.}\DecValTok{39}\NormalTok{,.}\DecValTok{29}\NormalTok{,.}\DecValTok{18}\NormalTok{,.}\DecValTok{16}\NormalTok{,.}\DecValTok{23}\NormalTok{,.}\DecValTok{24}\NormalTok{,.}\DecValTok{17}\NormalTok{,.}\DecValTok{08}\NormalTok{,.}\DecValTok{02}\NormalTok{,.}\DecValTok{02}\NormalTok{)}
+\NormalTok{hd <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.84}\NormalTok{,.}\DecValTok{44}\NormalTok{,.}\DecValTok{3}\NormalTok{,.}\DecValTok{06}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{14}\NormalTok{,.}\DecValTok{1}\NormalTok{,.}\DecValTok{09}\NormalTok{,.}\DecValTok{06}\NormalTok{,.}\DecValTok{04}\NormalTok{)}
+\NormalTok{lren <-}\StringTok{ }\KeywordTok{log}\NormalTok{(ren)}
+\NormalTok{lhd <-}\StringTok{ }\KeywordTok{log}\NormalTok{(hd)}
+
+\CommentTok{#a}
+\CommentTok{# Null: the mean log percentage change in renal patients is not greater than that of heart patients.}
+\CommentTok{# Alternative: the mean log percentage change in renal patients is higher than in heart disease patients.}
+
+\CommentTok{#b}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{t.test}\NormalTok{(lren,lhd,}\DataTypeTok{alt=}\StringTok{"greater"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  lren and lhd
+## t = 1.0602, df = 21.693, p-value = 0.1504
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -0.326982       Inf
+## sample estimates:
+## mean of x mean of y 
+## -1.327820 -1.854697
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# T = 1.0602}
+\CommentTok{# Df = 21.693}
+\NormalTok{Delta.hat =}\StringTok{ }\KeywordTok{mean}\NormalTok{(lren) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(lhd)}
+\NormalTok{std.error =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{var}\NormalTok{(lren)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(lren) }\OperatorTok{+}\StringTok{ }\KeywordTok{var}\NormalTok{(lhd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(lhd))}
+\NormalTok{Tw =}\StringTok{ }\NormalTok{Delta.hat }\OperatorTok{/}\StringTok{ }\NormalTok{std.error}
+\NormalTok{df =}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(lren)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(lren)}\OperatorTok{+}\KeywordTok{var}\NormalTok{(lhd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(lhd))}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\NormalTok{((}\KeywordTok{var}\NormalTok{(lren)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(lren))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(lren)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(lhd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(lhd))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(lhd)}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"T ="}\NormalTok{,Tw,}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Df ="}\NormalTok{,df,}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## T = 1.06023 
+## Df = 21.69253
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#c}
+\NormalTok{p <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{pt}\NormalTok{(Tw, }\DataTypeTok{df=}\NormalTok{df)}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"P-value ="}\NormalTok{,p,}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## P-value = 0.1503513
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Since the P-value > the significance level we fail to reject the null hypothesis that the mean}
+\CommentTok{# log percentage change in renal patients is not greater than that of heart patients.}
+
+\CommentTok{#d}
+\NormalTok{lower <-}\StringTok{ }\NormalTok{Delta.hat }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{, }\DataTypeTok{df=}\NormalTok{df) }\OperatorTok{*}\StringTok{ }\NormalTok{std.error}
+\NormalTok{upper <-}\StringTok{ }\NormalTok{Delta.hat }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{, }\DataTypeTok{df=}\NormalTok{df) }\OperatorTok{*}\StringTok{ }\NormalTok{std.error}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"95% conf interval: ("}\NormalTok{,lower,}\StringTok{","}\NormalTok{,upper,}\StringTok{")}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 95% conf interval: ( -0.5045728 , 1.558326 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# This confidence interval tells me that we are 95% confident that distributions of red blood}
+\CommentTok{# cell count changes in renal anemia patients will be between -0.5 and 1.6 higher.}
+
+
+\CommentTok{### 3}
+\NormalTok{old <-}\StringTok{ }\KeywordTok{c}\NormalTok{(.}\DecValTok{89}\NormalTok{,.}\DecValTok{49}\NormalTok{,.}\DecValTok{91}\NormalTok{,.}\DecValTok{8}\NormalTok{,.}\DecValTok{56}\NormalTok{,.}\DecValTok{79}\NormalTok{,.}\DecValTok{47}\NormalTok{,.}\DecValTok{5}\NormalTok{,}\FloatTok{1.08}\NormalTok{,}\FloatTok{1.65}\NormalTok{,}\FloatTok{1.94}\NormalTok{)}
+\NormalTok{yung <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{2.13}\NormalTok{,}\FloatTok{1.16}\NormalTok{,}\FloatTok{2.6}\NormalTok{,}\FloatTok{1.58}\NormalTok{,}\FloatTok{1.53}\NormalTok{,}\FloatTok{1.7}\NormalTok{,}\FloatTok{2.67}\NormalTok{,}\FloatTok{2.64}\NormalTok{,}\FloatTok{2.19}\NormalTok{,}\FloatTok{2.54}\NormalTok{,}\FloatTok{4.46}\NormalTok{)}
+\NormalTok{dhat <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(yung)}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(old)}
+
+\CommentTok{#a}
+\CommentTok{# We should test this data using a one-sample t-test because there is only one independent sample here,}
+\CommentTok{# which is the difference between the old and young roots' water absorption.}
+
+\CommentTok{#b}
+\KeywordTok{qqnorm}\NormalTok{(old}\OperatorTok{-}\NormalTok{yung)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{midterm2_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# a) We can see from the qqnorm plot that old-young does not follow a normal distribution,}
+\CommentTok{# thus we should be hesitant to run a t-test on it.}
+\CommentTok{# b) You cannot take the log on negative data, and old-young would give negative.}
+
+\CommentTok{#c}
+\NormalTok{ratio <-}\StringTok{ }\NormalTok{old}\OperatorTok{/}\NormalTok{yung}
+\NormalTok{low <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(ratio) }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\DataTypeTok{df=}\KeywordTok{length}\NormalTok{(ratio)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sd}\NormalTok{(ratio) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{length}\NormalTok{(ratio))}
+\NormalTok{hi <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(ratio) }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\DataTypeTok{df=}\KeywordTok{length}\NormalTok{(ratio)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sd}\NormalTok{(ratio) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{length}\NormalTok{(ratio))}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"95% conf interval: ("}\NormalTok{,low,}\StringTok{","}\NormalTok{,hi,}\StringTok{")}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 95% conf interval: ( 0.3147243 , 0.4980868 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# This means that we are 95% confident that that ratio of young/old is between 0.31 and 0.50.}
+
+
+\CommentTok{### 4}
+\NormalTok{wash <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"handwashing.txt"}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{#a}
+\CommentTok{# All 132 participants are the experimental units.}
+\CommentTok{# On each unit the measurements taken are the moral judgement scores from 1-7.}
+\CommentTok{# There are two independent samples, the group of 63 students who had their hands washed}
+\CommentTok{# and the group of 69 students who did not. }
+
+\CommentTok{#b}
+\NormalTok{Total <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{132}\NormalTok{)}
+\NormalTok{Twash <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{63}\NormalTok{)}
+\NormalTok{Tdirt <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{69}\NormalTok{)}
+\NormalTok{tw <-}\StringTok{ }\DecValTok{1}
+\NormalTok{td <-}\StringTok{ }\DecValTok{1}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{132}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (wash[i,}\DecValTok{1}\NormalTok{]) \{}
+\NormalTok{    Total[i] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(wash[i,])}\OperatorTok{-}\DecValTok{1}
+\NormalTok{    Twash[tw] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(wash[i,])}\OperatorTok{-}\DecValTok{1}
+\NormalTok{    tw =}\StringTok{ }\NormalTok{tw}\OperatorTok{+}\DecValTok{1}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    Total[i] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(wash[i,])}
+\NormalTok{    Tdirt[td] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(wash[i,])}
+\NormalTok{    td =}\StringTok{ }\NormalTok{td}\OperatorTok{+}\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{density}\NormalTok{(Twash),}\DataTypeTok{main=}\StringTok{"Total moral judgement scores"}\NormalTok{,}\DataTypeTok{sub=}\StringTok{"Black: Washed hands, Red: Unwashed"}\NormalTok{,}
+     \DataTypeTok{xlab=}\StringTok{"Total Judgement Score"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(}\KeywordTok{density}\NormalTok{(Tdirt),}\DataTypeTok{col=}\StringTok{"Red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{midterm2_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aveTW <-}\StringTok{ }\KeywordTok{ave}\NormalTok{(Twash)}
+\NormalTok{aveTD <-}\StringTok{ }\KeywordTok{ave}\NormalTok{(Tdirt)}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Average total moral judgement score of washed hands:"}\NormalTok{,aveTW[}\DecValTok{1}\NormalTok{],}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Average total moral judgement score of washed hands: 33.66667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Average total moral judgement score of unwashed hands:"}\NormalTok{,aveTD[}\DecValTok{1}\NormalTok{],}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Average total moral judgement score of unwashed hands: 33.84058
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#c}
+\CommentTok{# Null: Handwashing does not decrease the total morality judgement score.}
+\CommentTok{# Alternative: Handwashing decreases the total morality judgement score.}
+\CommentTok{# Welch's T-test (one-tailed)}
+\NormalTok{D.hat =}\StringTok{ }\KeywordTok{mean}\NormalTok{(Tdirt) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Twash)}
+\NormalTok{s.error =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{var}\NormalTok{(Twash)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Twash) }\OperatorTok{+}\StringTok{ }\KeywordTok{var}\NormalTok{(Tdirt)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Tdirt))}
+\NormalTok{TW =}\StringTok{ }\NormalTok{D.hat }\OperatorTok{/}\StringTok{ }\NormalTok{s.error}
+\NormalTok{DF =}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(Twash)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Twash)}\OperatorTok{+}\KeywordTok{var}\NormalTok{(Tdirt)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Tdirt))}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\NormalTok{((}\KeywordTok{var}\NormalTok{(Twash)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Twash))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(Twash)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(Tdirt)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Tdirt))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(Tdirt)}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+\NormalTok{p4 <-}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{pt}\NormalTok{(Tw, }\DataTypeTok{df=}\NormalTok{df))}\OperatorTok{/}\DecValTok{2}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Test Statistic:"}\NormalTok{,TW,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Degrees of freedom:"}\NormalTok{,DF,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{P-value:"}\NormalTok{,p4,}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Test Statistic: 0.2539921 
+## Degrees of freedom: 122.7299 
+## P-value: 0.07517565
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Given that the p-value > our significance value of 0.05, we fail to reject the null hypothesis that}
+\CommentTok{# washing hands results in a lower total morality score. To put it into plain english, we failed to be}
+\CommentTok{# statistically confident that washing hands lowers morality score. }
+
+\CommentTok{#d}
+\NormalTok{low <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Twash) }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\DataTypeTok{df=}\KeywordTok{length}\NormalTok{(Twash)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sd}\NormalTok{(Twash) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{length}\NormalTok{(Twash))}
+\NormalTok{hi <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Twash) }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\DataTypeTok{df=}\KeywordTok{length}\NormalTok{(Twash)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sd}\NormalTok{(Twash) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{length}\NormalTok{(Twash))}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"95% conf interval of Total for handwashing: ("}\NormalTok{,low,}\StringTok{","}\NormalTok{,hi,}\StringTok{")}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 95% conf interval of Total for handwashing: ( 32.60779 , 34.72554 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{low <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Tdirt) }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\DataTypeTok{df=}\KeywordTok{length}\NormalTok{(Tdirt)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sd}\NormalTok{(Tdirt) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{length}\NormalTok{(Tdirt))}
+\NormalTok{hi <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Tdirt) }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\DataTypeTok{df=}\KeywordTok{length}\NormalTok{(Tdirt)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sd}\NormalTok{(Tdirt) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{length}\NormalTok{(Tdirt))}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"95% conf interval of Total for control: ("}\NormalTok{,low,}\StringTok{","}\NormalTok{,hi,}\StringTok{")}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 95% conf interval of Total for control: ( 32.9748 , 34.70636 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Delta.hat =}\StringTok{ }\KeywordTok{mean}\NormalTok{(Tdirt) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Twash)}
+\NormalTok{std.error =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{var}\NormalTok{(Tdirt)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Tdirt) }\OperatorTok{+}\StringTok{ }\KeywordTok{var}\NormalTok{(Twash)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Twash))}
+\NormalTok{Tw =}\StringTok{ }\NormalTok{Delta.hat }\OperatorTok{/}\StringTok{ }\NormalTok{std.error}
+\NormalTok{df =}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(Tdirt)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Tdirt)}\OperatorTok{+}\KeywordTok{var}\NormalTok{(Twash)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Twash))}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\NormalTok{((}\KeywordTok{var}\NormalTok{(Tdirt)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Tdirt))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(Tdirt)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(Twash)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(Twash))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(Twash)}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+\NormalTok{lower <-}\StringTok{ }\NormalTok{Delta.hat }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{, }\DataTypeTok{df=}\NormalTok{df) }\OperatorTok{*}\StringTok{ }\NormalTok{std.error}
+\NormalTok{upper <-}\StringTok{ }\NormalTok{Delta.hat }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{, }\DataTypeTok{df=}\NormalTok{df) }\OperatorTok{*}\StringTok{ }\NormalTok{std.error}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"95% conf interval of diff in mean between two groups: ("}\NormalTok{,lower,}\StringTok{","}\NormalTok{,upper,}\StringTok{")}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 95% conf interval of diff in mean between two groups: ( -1.181474 , 1.529301 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{### 5}
+\NormalTok{don <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"trump.txt"}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{trump.white <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(don, name.type }\OperatorTok{==}\StringTok{ "white"}\NormalTok{)}
+\NormalTok{trump.nonwhite <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(don, name.type }\OperatorTok{==}\StringTok{ "nonwhite"}\NormalTok{)}
+
+\CommentTok{#a}
+\NormalTok{nwvd <-}\StringTok{ }\NormalTok{trump.nonwhite[,}\StringTok{"vote.diff"}\NormalTok{]}
+\NormalTok{nwvdm <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(nwvd)}
+\NormalTok{nwvdsd <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(nwvd)}
+\NormalTok{nwvdn <-}\StringTok{ }\KeywordTok{length}\NormalTok{(nwvd)}
+\NormalTok{t <-}\StringTok{ }\NormalTok{nwvdm }\OperatorTok{/}\StringTok{ }\NormalTok{(nwvdsd}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(nwvdn))}
+\NormalTok{p <-}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\KeywordTok{pt}\NormalTok{(t, }\DataTypeTok{df =}\NormalTok{ nwvdn}\DecValTok{-1}\NormalTok{)}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"One-sample t-test of the hypothesis that μNW is 0 p-value:"}\NormalTok{,p,}\StringTok{"which is less than the significance value of 0.05"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{thus we reject the null hypothesis that μNW is zero and accept the alternative hypothesis that the mean vote"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{differential for a hypothetical population of Trump delegates with nonwhite names is not 0, meaning the delegates"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{with non-white names did not succeed in getting 1/3 of all votes for Trump. Ultimately, we conclude that the"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{'color' of names negatively impacted Trumps votes.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## One-sample t-test of the hypothesis that μNW is 0 p-value: 0.004213093 which is less than the significance value of 0.05 
+## thus we reject the null hypothesis that μNW is zero and accept the alternative hypothesis that the mean vote 
+## differential for a hypothetical population of Trump delegates with nonwhite names is not 0, meaning the delegates 
+## with non-white names did not succeed in getting 1/3 of all votes for Trump. Ultimately, we conclude that the 
+## 'color' of names negatively impacted Trumps votes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#b}
+\NormalTok{wvd <-}\StringTok{ }\NormalTok{trump.white[,}\StringTok{"vote.diff"}\NormalTok{]}
+\NormalTok{D.hat =}\StringTok{ }\KeywordTok{mean}\NormalTok{(wvd) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(nwvd)}
+\NormalTok{s.error =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{var}\NormalTok{(wvd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(wvd) }\OperatorTok{+}\StringTok{ }\KeywordTok{var}\NormalTok{(nwvd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(nwvd))}
+\NormalTok{TW =}\StringTok{ }\NormalTok{D.hat }\OperatorTok{/}\StringTok{ }\NormalTok{s.error}
+\NormalTok{DF =}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(wvd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(wvd)}\OperatorTok{+}\KeywordTok{var}\NormalTok{(nwvd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(nwvd))}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\NormalTok{((}\KeywordTok{var}\NormalTok{(wvd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(wvd))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(wvd)}\OperatorTok{-}\DecValTok{1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{var}\NormalTok{(nwvd)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(nwvd))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(nwvd)}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+\NormalTok{p <-}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{pt}\NormalTok{(Tw, }\DataTypeTok{df=}\NormalTok{df))}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Two-sample t-test of the hypothesis μW is the same as μNW p-value:"}\NormalTok{,p,}\StringTok{"which is greater than the significance"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{value of 0.05, thus we fail to reject the null hypothesis that the vote differential of Trump delegates"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{that are white is the same as the vote differential of Trump delegates that are nonwhite. We therefore"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{conclude that μW is different from μNW, and ultimately that Trump's vote differential is contingent on"}\NormalTok{,}
+    \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{the 'color' of names, and that the white named delegates were more successful at getting Trump votes."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Two-sample t-test of the hypothesis μW is the same as μNW p-value: 0.3999633 which is greater than the significance 
+## value of 0.05, thus we fail to reject the null hypothesis that the vote differential of Trump delegates 
+## that are white is the same as the vote differential of Trump delegates that are nonwhite. We therefore 
+## conclude that μW is different from μNW, and ultimately that Trump's vote differential is contingent on 
+## the 'color' of names, and that the white named delegates were more successful at getting Trump votes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#c}
+\CommentTok{# I think the two-sample t-test is closer to having its assumptions met because we have two independent sample population}
+\CommentTok{# sets so doing a one-sample t-test would be leaving out data that could potentially influence the outcome. For this reason,}
+\CommentTok{# because the two-sample t-test includes all available data, I think it is closer to being accurate across this data. }
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}
